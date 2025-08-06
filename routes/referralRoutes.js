@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("../middleware/auth");
+const authMiddleware = require("../middlewares/auth");
 const { getReferralInfo } = require("../controllers/referralController");
 
-router.get("/", auth, getReferralInfo);
+router.get("/", authMiddleware, getReferralInfo);
 
 module.exports = router;
