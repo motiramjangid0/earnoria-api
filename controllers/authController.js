@@ -90,7 +90,7 @@ exports.verifyOtp = async (req, res) => {
     user.otp = null;
 
     // Remove createdAt so TTL won't delete
-    user.createdAt = new Date();
+    user.createdAt = undefined;
 
     await user.save();
 
