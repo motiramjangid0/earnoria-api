@@ -22,7 +22,7 @@ const sendOTPEmail = async (email, otp) => {
 };
 
 exports.register = async (req, res) => {
-  const { name, email, password, referralCode } = req.body; // added referralCode
+  const { name, email, mobile, password, referralCode } = req.body; // added referralCode
   try {
     const existing = await User.findOne({ email });
     if (existing)
@@ -34,6 +34,7 @@ exports.register = async (req, res) => {
     const newUserData = {
       name,
       email,
+      mobile,
       password: hashedPassword,
       otp,
     };
