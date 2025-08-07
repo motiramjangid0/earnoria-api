@@ -21,7 +21,6 @@ const sendOTPEmail = async (email, otp) => {
   });
 };
 
-// Register User
 exports.register = async (req, res) => {
   const { name, email, password, referralCode } = req.body; // added referralCode
   try {
@@ -65,6 +64,7 @@ exports.register = async (req, res) => {
 };
 
 // Verify OTP
+// Verify OTP
 exports.verifyOtp = async (req, res) => {
   const { email, otp } = req.body;
   try {
@@ -75,6 +75,10 @@ exports.verifyOtp = async (req, res) => {
 
     user.isVerified = true;
     user.otp = null;
+
+    // Remove createdAt so MongoDB TTL doesn't delete
+    user.createdAt = undefined;
+
     await user.save();
 
     res.json({ message: "Email verified successfully." });
